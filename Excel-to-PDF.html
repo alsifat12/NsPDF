@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel to PDF Converter - Ns Tools</title>
+    <link rel="stylesheet" href="../css/style.css"> <!-- Assuming you have a main style.css -->
+    <style>
+        /* Styles specific to this tool page, can be moved to style.css if shared */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #eef5fc; /* Light blue-grey page background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            color: #343a40;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Main Header and Footer placeholders - for consistent layout */
+        /* You would replace these with your actual header/footer or include them via JS/templating */
+        #main-header-placeholder, #main-footer-placeholder {
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #main-footer-placeholder { margin-top: auto; margin-bottom: 0; }
+
+
+        .tool-page-container { /* This replaces .main-tool-container for clarity */
+            text-align: center;
+            max-width: 550px; /* Slightly adjusted width */
+            width: 100%;
+            background-color: #ffffff; 
+            padding: 30px 35px; 
+            border-radius: 16px; /* More rounded */
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08); 
+            margin-top: 20px; /* Space from potential header */
+        }
+
+        .tool-page-container h1 {
+            font-size: 2.3em; 
+            font-weight: 700;
+            color: #2c3e50; /* Dark blue-grey */
+            margin-bottom: 8px;
+        }
+
+        .tool-page-container .subtitle {
+            font-size: 1em;
+            color: #6c757d; 
+            margin-bottom: 30px;
+        }
+
+        .upload-box { /* Replaces .uploader-module */
+            background-color: #f0f6fc; /* Very light blue for the inner box */
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .primary-upload-button { /* Replaces .primary-select-button */
+            display: flex;
+            align-items: stretch; /* Make sure both parts are same height */
+            background-color: #0d6efd; 
+            color: white;
+            border: none;
+            height: 56px; 
+            border-radius: 10px; 
+            font-size: 1.05em;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            max-width: 380px; 
+            padding: 0; /* Remove padding, control with inner spans */
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+            margin: 0 auto 25px auto; 
+        }
+
+        .primary-upload-button:hover {
+            background-color: #0a58ca; /* Darker shade of primary blue */
+            box-shadow: 0 5px 18px rgba(10, 88, 202, 0.25);
+        }
+
+        .primary-upload-button-text { /* Replaces .primary-select-button-text */
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center text if no icon on left */
+            padding: 0 20px; /* Padding for text area */
+        }
+
+        .primary-upload-button-icon { /* Replaces .primary-select-button-icon-area */
+            width: 56px; /* Square icon area */
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #0a58ca; /* Slightly darker part for icon */
+        }
+
+        .primary-upload-button-icon .upload-arrow-svg {
+            width: 22px;
+            height: 22px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        input[type="file"] {
+            display: none; 
+        }
+
+        .cloud-upload-options { /* Replaces .alternative-upload-options */
+            display: flex;
+            flex-direction: column; /* Stack vertically on mobile by default, row on larger */
+            gap: 15px; 
+            justify-content: center;
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 500px) { /* Side-by-side on larger screens */
+            .cloud-upload-options {
+                flex-direction: row;
+            }
+        }
+
+        .cloud-upload-btn { /* Replaces .alt-upload-btn */
+            background-color: #ffffff;
+            color: #495057;
+            border: 1px solid #e0e6ed; /* Lighter border */
+            padding: 15px 20px; /* More padding */
+            border-radius: 10px;
+            font-size: 0.98em;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            /* justify-content: center; Let text align left naturally */
+            gap: 12px; /* Increased gap */
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            flex: 1;
+            text-align: left;
+        }
+
+        .cloud-upload-btn:hover {
+            background-color: #f8f9fc;
+            border-color: #ced4da;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+        }
+
+        .cloud-upload-btn .icon-svg svg {
+            width: 24px; /* Larger icons for cloud buttons */
+            height: 24px;
+            flex-shrink: 0; /* Prevent icon from shrinking */
+        }
+        .cloud-upload-btn span {
+             flex-grow: 1;
+        }
+        
+        .gdrive-icon .gdrive-yellow { fill: #FFC107; }
+        .gdrive-icon .gdrive-green { fill: #34A853; }
+        .gdrive-icon .gdrive-blue  { fill: #4285F4; }
+        .dropbox-icon { fill: #0062ff; }
+
+
+        .file-info-display {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            color: #555;
+            font-style: italic;
+            word-break: break-all;
+            min-height: 18px; 
+        }
+
+        .action-button { /* Replaces .convert-action-button */
+            background-color: #198754; 
+            color: white;
+            border: none;
+            padding: 13px 28px; 
+            border-radius: 8px;
+            font-size: 1.05em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(25, 135, 84, 0.2);
+        }
+        
+        .action-button .btn-icon-svg { /* Replaces .convert-icon-svg */
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        .action-button:disabled {
+            background-color: #adb5bd; 
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .action-button:hover:not(:disabled) {
+            background-color: #146c43; 
+            box-shadow: 0 5px 15px rgba(20, 108, 67, 0.25);
+        }
+
+        .status-message { /* Replaces .status-feedback-message */
+            margin-top: 20px;
+            font-weight: 500;
+            font-size: 0.95em;
+            min-height: 20px; 
+        }
+
+        .download-link { /* Replaces .download-pdf-link */
+            margin-top: 20px;
+            padding: 13px 28px;
+            background-color: #0d6efd; 
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.05em;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+            display: none; /* Initially none, changed by JS */
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+        }
+        
+        .download-link .btn-icon-svg { /* Replaces .download-icon-svg */
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        .download-link:hover {
+            background-color: #0a58ca;
+        }
+    </style>
+</head>
+<body>
+    <!-- Placeholder for your main site header/navigation -->
+    <!-- <div id="main-header-placeholder">Your NsTools Header Would Go Here</div> -->
+
+    <div class="tool-page-container">
+        <h1>Excel to PDF</h1>
+        <p class="subtitle">Upload your file to use the Excel to PDF tool.</p>
+
+        <div class="upload-box" id="dragDropUploadArea">
+            <input type="file" id="fileInput" accept=".xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+            
+            <button type="button" id="triggerFileInput" class="primary-upload-button">
+                <span class="primary-upload-button-text">Select File</span>
+                <span class="primary-upload-button-icon">
+                    <svg class="upload-arrow-svg" viewBox="0 0 24 24">
+                        <path d="M12 19V5"></path>
+                        <polyline points="5 12 12 5 19 12"></polyline>
+                    </svg>
+                </span>
+            </button>
+
+            <div class="cloud-upload-options">
+                <button type="button" class="cloud-upload-btn google-drive-btn">
+                    <span class="icon-svg gdrive-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polygon class="gdrive-yellow" points="8.53,3.5 2.87,13.5 7.17,13.5 12.83,3.5 "/>
+                            <polygon class="gdrive-green" points="15.47,3.5 21.13,13.5 16.83,13.5 11.17,3.5 "/>
+                            <polygon class="gdrive-blue" points="12,14.5 6.34,14.5 9.17,19.5 14.83,19.5 "/>
+                        </svg>
+                    </span>
+                    <span>Google Drive</span>
+                </button>
+                <button type="button" class="cloud-upload-btn dropbox-btn">
+                    <span class="icon-svg dropbox-icon">
+                        <svg viewBox="0 0 16 16">
+                          <path d="M8.01 4.395L4.005 6.975 0 4.39l4.005-2.58L8.01 4.395zm0 7.94l-4.005 2.58L0 12.33l4.005-2.58L8.01 12.335zm4.215-5.36L8.22 9.555l-4.005-2.58 4.005-2.58 4.005 2.58zM16 4.39L11.995 6.97l-4.005-2.58L11.995 1.81 16 4.39zm0 7.94l-4.005 2.58-4.005-2.58 4.005-2.58L16 12.33z"/>
+                        </svg>
+                    </span>
+                    <span>Dropbox</span>
+                </button>
+            </div>
+        </div>
+        
+        <div id="selectedFileInfo" class="file-info-display">No file selected.</div>
+        
+        <button id="convertButton" class="action-button" disabled> <!-- ID changed for clarity -->
+            <svg class="btn-icon-svg" viewBox="0 0 24 24"> <!-- Generic convert icon -->
+                <path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"></path>
+            </svg>
+            <span>Convert to PDF</span>
+        </button>
+
+        <div id="statusMessage" class="status-message"></div> <!-- ID changed -->
+        
+        <a id="downloadLink" class="download-link" href="#" download style="display: none;"> <!-- ID changed -->
+             <svg class="btn-icon-svg" viewBox="0 0 24 24"> <!-- Generic download icon -->
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"></path>
+            </svg>
+            <span>Download PDF</span>
+        </a>
+    </div>
+
+    <!-- Placeholder for your main site footer -->
+    <!-- <div id="main-footer-placeholder">Your NsTools Footer Would Go Here</div> -->
+
+    <script>
+        const triggerFileInputBtn = document.getElementById('triggerFileInput');
+        const fileInputEl = document.getElementById('fileInput'); // Updated ID
+        const selectedFileInfoEl = document.getElementById('selectedFileInfo');
+        const convertBtn = document.getElementById('convertButton'); // Updated ID
+        const statusMsgEl = document.getElementById('statusMessage'); // Updated ID
+        const downloadLinkEl = document.getElementById('downloadLink'); // Updated ID
+        const dragDropAreaEl = document.getElementById('dragDropUploadArea'); // Consistent ID
+
+        let currentFile = null;
+
+        triggerFileInputBtn.addEventListener('click', () => fileInputEl.click());
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dragDropAreaEl.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+        function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dragDropAreaEl.addEventListener(eventName, () => dragDropAreaEl.style.borderColor = '#0d6efd', false); // Highlight border
+        });
+        ['dragleave', 'drop'].forEach(eventName => {
+            dragDropAreaEl.addEventListener(eventName, () => dragDropAreaEl.style.borderColor = 'transparent', false); // Reset border
+        });
+        dragDropAreaEl.addEventListener('drop', (event) => {
+            const files = event.dataTransfer.files;
+            if (files.length) handleFile(files[0]);
+        });
+
+        fileInputEl.addEventListener('change', (event) => {
+            if (event.target.files.length) handleFile(event.target.files[0]);
+        });
+
+        function handleFile(file) {
+            // Specific for Excel to PDF
+            const allowedExtensions = /(\.xls|\.xlsx)$/i;
+            const allowedMimeTypes = [
+                'application/vnd.ms-excel',
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            ];
+
+            if (allowedExtensions.exec(file.name) || allowedMimeTypes.includes(file.type)) {
+                currentFile = file;
+                selectedFileInfoEl.textContent = `Selected: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+                selectedFileInfoEl.style.color = '#495057';
+                convertBtn.disabled = false;
+                statusMsgEl.textContent = '';
+                downloadLinkEl.style.display = 'none';
+            } else {
+                currentFile = null;
+                selectedFileInfoEl.textContent = 'Invalid file. Please select an Excel (.xls, .xlsx) file.';
+                selectedFileInfoEl.style.color = '#dc3545';
+                convertBtn.disabled = true;
+                statusMsgEl.textContent = '';
+                downloadLinkEl.style.display = 'none';
+                fileInputEl.value = ''; 
+            }
+        }
+
+        convertBtn.addEventListener('click', async () => {
+            if (!currentFile) {
+                statusMsgEl.textContent = 'Please select a file first.';
+                statusMsgEl.style.color = '#dc3545';
+                return;
+            }
+
+            convertBtn.disabled = true;
+            convertBtn.querySelector('span').textContent = 'Processing...';
+            statusMsgEl.textContent = 'Converting your Excel file to PDF...';
+            statusMsgEl.style.color = '#0dcaf0'; // Bootstrap info color
+            downloadLinkEl.style.display = 'none';
+
+            // --- SIMULATED CONVERSION ---
+            try {
+                console.log("Simulating Excel to PDF conversion:", currentFile.name);
+                await new Promise(resolve => setTimeout(resolve, 3000)); // Simulate network and processing
+
+                const success = Math.random() > 0.1; // 90% success
+                if (success) {
+                    const pdfContent = `This is a PDF generated from "${currentFile.name}". (Simulated)`;
+                    const blob = new Blob([pdfContent], { type: 'application/pdf' });
+                    const url = URL.createObjectURL(blob);
+                    const outputFilename = currentFile.name.replace(/\.(xls|xlsx)$/i, '.pdf');
+
+                    downloadLinkEl.href = url;
+                    downloadLinkEl.download = outputFilename;
+                    downloadLinkEl.style.display = 'inline-flex';
+                    statusMsgEl.textContent = 'Conversion successful! Your PDF is ready.';
+                    statusMsgEl.style.color = '#198754';
+                } else {
+                    statusMsgEl.textContent = 'Conversion failed. Please try again. (Simulated)';
+                    statusMsgEl.style.color = '#dc3545';
+                }
+            } catch (err) {
+                console.error("Simulated error:", err);
+                statusMsgEl.textContent = 'An error occurred during conversion. (Simulated)';
+                statusMsgEl.style.color = '#dc3545';
+            } finally {
+                convertBtn.disabled = false;
+                convertBtn.querySelector('span').textContent = 'Convert to PDF';
+            }
+        });
+
+        // Placeholder for cloud service integration
+        document.querySelector('.google-drive-btn').addEventListener('click', () => alert('Google Drive upload not implemented.'));
+        document.querySelector('.dropbox-btn').addEventListener('click', () => alert('Dropbox upload not implemented.'));
+
+    </script>
+</body>
+</html>
