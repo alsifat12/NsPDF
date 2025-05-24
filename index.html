@@ -30,26 +30,25 @@
         nav ul li a.nav-link.active { border-bottom-color: #007bff; padding-bottom: 8px; }
         .dropdown-arrow { font-size: 0.7em; margin-left: 5px; }
 
-        /* Standard Dropdown & Mega Menu Base */
+        /* Standard Dropdown & Mega Menu Base (Kept for potential future use with other dropdowns, though Home no longer uses it) */
         .dropdown-menu { display: none; position: absolute; background-color: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); list-style: none; padding: 5px 0; margin: 0; min-width: 220px; z-index: 1001; left: 0; border-radius: 4px; border-top: 3px solid #007bff; }
         .dropdown-menu li a { padding: 10px 20px; white-space: nowrap; font-size: 0.9em; color: #495057; font-weight: 500; }
         .dropdown-menu li a:hover { background-color: #f0f8ff; color: #0056b3; }
 
-        /* Mega Menu General Structure */
+        /* Mega Menu General Structure (Kept for potential future use, though Home no longer uses it directly) */
         .mega-menu { display: flex; flex-wrap: wrap; justify-content: flex-start; padding: 20px 10px; }
         .mega-menu-column { padding: 0 10px; margin-bottom: 15px; }
         .mega-menu-column h4 { font-size: 0.95em; color: #007bff; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #e9ecef; font-weight: 600; }
         
-        /* Default UL style within mega-menu-column (for regular dropdowns if mega-menu-column is reused) */
         .mega-menu-column ul { list-style: none; padding: 0; display: flex; flex-direction: column; }
         .mega-menu-column ul li a { 
             font-size: 0.88em; 
             padding: 7px 5px; 
             color: #555; 
-            display: flex; /* For icon alignment */
-            align-items: center; /* For icon alignment */
+            display: flex; 
+            align-items: center; 
         }
-        .mega-menu-column ul li a i { /* Style for icons in mega menu links */
+        .mega-menu-column ul li a i { 
             margin-right: 8px; 
             font-size: 0.9em; 
             color: #007bff; 
@@ -60,7 +59,8 @@
         .mega-menu-column ul li a:hover i { color: #0056b3; }
 
 
-        /* Specific styles for Home Mega Menu */
+        /* Specific styles for Home Mega Menu - These might become redundant or need adjustment if no other mega menus use these exact classes */
+        /* If Home was the *only* mega menu, these could be removed or generalized */
         li.is-home-mega-menu .mega-menu { min-width: 950px; max-width: 95vw; left: 0; transform: translateX(0); }
         li.is-home-mega-menu .mega-menu-column { flex: 1 1 calc(20% - 20px); min-width: 180px; }
         li.is-home-mega-menu .mega-menu-column ul { display: flex; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
@@ -138,8 +138,14 @@
             nav ul li a.active, nav ul li a.nav-link.active { border-bottom: none; border-left: 3px solid #007bff; padding-left: 15px;}
             .menu-toggle { display: block; }
             nav { position: relative; }
-            .dropdown-menu, .mega-menu { position: static; box-shadow: none; border-top: 1px solid #e9ecef; width: 100% !important; min-width: 100%; transform: none !important; left: 0 !important; border-radius:0; border-left: 3px solid transparent; }
+            /* Adjustments for dropdowns in responsive if any exist, Home mega-menu specific styles below might be less relevant */
+            .dropdown-menu, .mega-menu { /* This style might apply if other dropdowns exist and become static */
+                position: static; box-shadow: none; border-top: 1px solid #e9ecef; 
+                width: 100% !important; min-width: 100%; transform: none !important; 
+                left: 0 !important; border-radius:0; border-left: 3px solid transparent; 
+            }
             
+            /* These .mega-menu specific responsive styles might need review if other mega-menus exist or if Home was the only one*/
             .mega-menu-column ul { display: flex; flex-direction: column !important; padding: 0; }
             .mega-menu-column ul li { width: auto !important; margin-right: 0 !important; }
             .mega-menu-column ul li a { padding-left: 25px !important; white-space: normal; }
@@ -166,7 +172,8 @@
             .tools-grid { grid-template-columns: 1fr; } .logo { font-size: 1.7em; }
             .hero h1 { font-size: 1.8em; } .hero p { font-size: 0.95em; } .category-title { font-size: 1.5em; }
             nav ul li a {padding: 10px 15px;}
-            li.is-home-mega-menu .mega-menu-column ul li { width: 100% !important; }
+            /* This specific rule for home mega menu list items might be obsolete now */
+            /* li.is-home-mega-menu .mega-menu-column ul li { width: 100% !important; } */
             .modal-upload-container .select-file-button { height: 50px; font-size: 0.95em;}
             .modal-upload-container .select-file-button .document-icon svg { width: 22px; height: 22px;}
             .modal-upload-container .upload-icon-container { width: 50px; }
@@ -179,84 +186,11 @@
 
     <header>
         <nav>
-            <div class="logo">Ns Tools</div>
-            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            <div class="logo">NsTools</div> <button class="menu-toggle" aria-label="Toggle menu">☰</button>
             <ul>
-                <li class="dropdown is-home-mega-menu">
-                    <a href="#" class="nav-link dropdown-toggle active" data-category="home">Home <span class="dropdown-arrow">▼</span></a>
-                    <div class="dropdown-menu mega-menu">
-                        <div class="mega-menu-column">
-                            <h4>Office Tools</h4>
-                            <ul>
-                                <li><a href="#office-tools" title="Word to PDF Converter"><i class="fa-solid fa-file-word"></i> Word to PDF</a></li>
-                                <li><a href="#office-tools" title="Excel to PDF Converter"><i class="fa-solid fa-file-excel"></i> Excel to PDF</a></li>
-                                <li><a href="#office-tools" title="PPT to PDF Converter"><i class="fa-solid fa-file-powerpoint"></i> PPT to PDF</a></li>
-                                <li><a href="#office-tools" title="Online Word Document Viewer"><i class="fa-solid fa-eye"></i> Word Viewer</a></li>
-                                <li><a href="#office-tools" title="Online Spreadsheet Viewer"><i class="fa-solid fa-table-list"></i> Spreadsheet Viewer</a></li>
-                                <li><a href="#office-tools" title="Online Presentation Viewer"><i class="fa-solid fa-person-chalkboard"></i> Presentation Viewer</a></li>
-                                <li><a href="#office-tools" title="Create New Document Online"><i class="fa-solid fa-file-circle-plus"></i> Create Document</a></li>
-                                <li><a href="#office-tools" title="Create New Spreadsheet Online"><i class="fa-solid fa-table-cells"></i> Create Spreadsheet</a></li>
-                                <li><a href="#office-tools" title="Create New Presentation Online"><i class="fa-solid fa-display"></i> Create Presentation</a></li>
-                                <li><a href="#office-tools" title="Convert Word to JPG Image"><i class="fa-solid fa-file-image"></i> Word to JPG</a></li>
-                                <li><a href="#office-tools" title="Convert Word to PNG Image"><i class="fa-regular fa-file-image"></i> Word to PNG</a></li>
-                            </ul>
-                        </div>
-                        <div class="mega-menu-column">
-                            <h4>Online Editor</h4>
-                            <ul>
-                                <li><a href="#online-editor" title="Online PDF Editor"><i class="fa-solid fa-pen-to-square"></i> PDF Editor</a></li>
-                                <li><a href="#online-editor" title="Online ODT Editor"><i class="fa-solid fa-file-lines"></i> ODT Editor</a></li>
-                                <li><a href="#online-editor" title="Online ODS Editor"><i class="fa-solid fa-table-columns"></i> ODS Editor</a></li>
-                                <li><a href="#online-editor" title="Online ODP Editor"><i class="fa-solid fa-sliders"></i> ODP Editor</a></li>
-                                <li><a href="#online-editor" title="Online ODF Editor"><i class="fa-solid fa-folder"></i> ODF Editor</a></li>
-                                <li><a href="#online-editor" title="Online Word Editor"><i class="fa-solid fa-file-word"></i> Word Editor</a></li>
-                                <li><a href="#online-editor" title="Online Spreadsheet Editor"><i class="fa-solid fa-file-excel"></i> Spreadsheet Editor</a></li>
-                                <li><a href="#online-editor" title="Online Presentation Editor"><i class="fa-solid fa-file-powerpoint"></i> Presentation Editor</a></li>
-                                <li><a href="#online-editor" title="Online Docx & Doc Editor"><i class="fa-solid fa-file-pen"></i> Docx & Doc Editor</a></li>
-                                <li><a href="#online-editor" title="Online Xlsx & Xls Editor"><i class="fa-solid fa-calculator"></i> Xlsx & Xls Editor</a></li>
-                                <li><a href="#online-editor" title="Online PPTX Editor"><i class="fa-solid fa-person-presenting"></i> PPTX editor</a></li>
-                            </ul>
-                        </div>
-                        <div class="mega-menu-column">
-                            <h4>Images Tools</h4>
-                            <ul>
-                                <li><a href="#images-tools" title="Convert JPG to Word"><i class="fa-solid fa-image"></i> JPG to Word</a></li>
-                                <li><a href="#images-tools" title="Convert PNG to Word"><i class="fa-regular fa-image"></i> PNG to Word</a></li>
-                                <li><a href="#images-tools" title="Convert JPG to PDF"><i class="fa-solid fa-file-arrow-down"></i> JPG to PDF</a></li>
-                                <li><a href="#images-tools" title="Convert PNG to PDF"><i class="fa-regular fa-file-arrow-down"></i> PNG to PDF</a></li>
-                            </ul>
-                        </div>
-                        <div class="mega-menu-column">
-                            <h4>PDF Tools</h4>
-                            <ul>
-                                <li><a href="#pdf-tools" title="Online PDF Editor"><i class="fa-solid fa-file-pen"></i> PDF Editor</a></li>
-                                <li><a href="#pdf-tools" title="Convert PDF to Word"><i class="fa-solid fa-file-word"></i> PDF to Word</a></li>
-                                <li><a href="#pdf-tools" title="Convert PDF to Excel"><i class="fa-solid fa-file-excel"></i> PDF to Excel</a></li>
-                                <li><a href="#pdf-tools" title="Convert PDF to PowerPoint"><i class="fa-solid fa-file-powerpoint"></i> PDF to PowerPoint</a></li>
-                                <li><a href="#pdf-tools" title="Convert PDF to PNG"><i class="fa-regular fa-file-image"></i> PDF to PNG</a></li>
-                                <li><a href="#pdf-tools" title="Convert PDF to JPG"><i class="fa-solid fa-file-image"></i> PDF to JPG</a></li>
-                                <li><a href="#pdf-tools" title="Merge PDF Files"><i class="fa-solid fa-object-group"></i> Merge PDF</a></li>
-                                <li><a href="#pdf-tools" title="Split PDF File"><i class="fa-solid fa-object-ungroup"></i> Split PDF</a></li>
-                                <li><a href="#pdf-tools" title="Add Watermark to PDF"><i class="fa-solid fa-stamp"></i> Watermark</a></li>
-                            </ul>
-                        </div>
-                        <div class="mega-menu-column">
-                            <h4>Create Tools</h4>
-                            <ul>
-                                <li><a href="#create-tools" title="Create New Docx File"><i class="fa-solid fa-file-circle-plus"></i> Create Docx</a></li>
-                                <li><a href="#create-tools" title="Create New PDF File"><i class="fa-solid fa-file-pdf"></i> Create PDF</a></li>
-                                <li><a href="#create-tools" title="Create New ODT File"><i class="fa-solid fa-file-alt"></i> Create ODT</a></li>
-                                <li><a href="#create-tools" title="Create New TXT File"><i class="fa-solid fa-file-lines"></i> Create TXT</a></li>
-                                <li><a href="#create-tools" title="Create New Dotx File"><i class="fa-solid fa-file-invoice"></i> Create Dotx</a></li>
-                                <li><a href="#create-tools" title="Create New PDF/A File"><i class="fa-solid fa-shield-halved"></i> Create PDF/A</a></li>
-                                <li><a href="#create-tools" title="Create New OTT File"><i class="fa-solid fa-file-signature"></i> Create OTT</a></li>
-                                <li><a href="#create-tools" title="Create New RTF File"><i class="fa-solid fa-file-contract"></i> Create RTF</a></li>
-                                <li><a href="#create-tools" title="Create New DOCXF File"><i class="fa-solid fa-list-check"></i> Create DOCXF</a></li>
-                                <li><a href="#create-tools" title="Create New OFORM File"><i class="fa-brands fa-wpforms"></i> Create OFORM</a></li>
-                                <li><a href="#create-tools" title="Create New FB2 File"><i class="fa-solid fa-book"></i> Create FB2</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                <li>
+                    <a href="#" class="nav-link active" data-category="home">Home</a>
+                    <!-- Mega menu for Home has been removed -->
                 </li>
                 <li><a href="#office-tools" class="nav-link" data-category="office-tools">Office Tools</a></li>
                 <li><a href="#online-editor" class="nav-link" data-category="online-editor">Online Editor</a></li>
@@ -286,12 +220,12 @@
     <div id="toolModal" class="modal"> <div class="modal-content-wrapper"> <span class="close-modal-button">×</span> <div class="modal-upload-container"> <h1 id="modalToolTitle">Tool Title</h1> <p class="subtitle" id="modalToolSubtitle">Tool specific subtitle or general instruction.</p> <div class="upload-area"> <button type="button" class="select-file-button"> <span class="document-icon-wrapper"> <svg class="icon document-icon" viewBox="0 0 24 24"> <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path> <polyline points="14 2 14 8 20 8"></polyline> <line x1="16" y1="13" x2="8" y2="13"></line> <line x1="16" y1="17" x2="8" y2="17"></line> </svg> </span> <span class="button-text">Select File</span> <div class="upload-icon-container"> <svg class="icon upload-icon-svg" viewBox="0 0 24 24"> <path d="M12 19V5"></path> <polyline points="5 12 12 5 19 12"></polyline> </svg> </div> </button> <div class="alternative-uploads"> <button type="button" class="alt-upload-button google-drive"> <svg class="icon gdrive-icon" viewBox="0 0 24 24"> <polygon class="gdrive-yellow" points="8.53,3.5 2.87,13.5 7.17,13.5 12.83,3.5 "/> <polygon class="gdrive-green" points="15.47,3.5 21.13,13.5 16.83,13.5 11.17,3.5 "/> <polygon class="gdrive-blue" points="12,14.5 6.34,14.5 9.17,19.5 14.83,19.5 "/> </svg> <span>Google Drive</span> </button> <button type="button" class="alt-upload-button dropbox"> <svg class="icon dropbox-icon" viewBox="0 0 16 16"> <path d="M8.01 4.395L4.005 6.975 0 4.39l4.005-2.58L8.01 4.395zm0 7.94l-4.005 2.58L0 12.33l4.005-2.58L8.01 12.335zm4.215-5.36L8.22 9.555l-4.005-2.58 4.005-2.58 4.005 2.58zM16 4.39L11.995 6.97l-4.005-2.58L11.995 1.81 16 4.39zm0 7.94l-4.005 2.58-4.005-2.58 4.005-2.58L16 12.33z"/> </svg> <span>Dropbox</span> </button> </div> </div> </div> </div> </div>
 
     <script>
-        // JavaScript (Unchanged from previous response)
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.querySelector('.menu-toggle');
             const navUl = document.querySelector('nav ul');
             const allNavLinks = document.querySelectorAll('nav ul li a.nav-link'); 
-            const homeMegaMenuLink = document.querySelector('nav ul li.is-home-mega-menu > a.dropdown-toggle'); 
+            // const homeMegaMenuLink = document.querySelector('nav ul li.is-home-mega-menu > a.dropdown-toggle'); // This is no longer a dropdown
+            const homeLink = document.querySelector('nav ul li a.nav-link[data-category="home"]'); // Get the Home link directly
             const toolCategorySections = document.querySelectorAll('.tool-category-section.category-content');
 
             if (menuToggle && navUl) {
@@ -300,24 +234,30 @@
                 });
             }
 
+            // Simplified dropdown logic if other dropdowns exist.
+            // If Home was the ONLY dropdown, this entire block could be removed.
+            // For now, assuming other '.dropdown-toggle' elements might exist.
             const dropdownToggles = document.querySelectorAll('.dropdown-toggle'); 
             dropdownToggles.forEach(toggle => {
                 toggle.addEventListener('click', function(event) {
-                    if (this.parentElement.classList.contains('is-home-mega-menu')) {
-                        event.preventDefault();
-                        let currentDropdownMenu = this.nextElementSibling;
-                        if (window.innerWidth > 992) { 
-                            const isCurrentlyOpen = currentDropdownMenu && currentDropdownMenu.style.display === 'flex'; 
-                            document.querySelectorAll('nav .mega-menu').forEach(menu => {
+                    // Removed the is-home-mega-menu check as Home is no longer a mega menu.
+                    // This part now only applies to *other* potential dropdowns.
+                    // event.preventDefault(); // Only prevent default if it's a mega menu that shouldn't navigate
+                    let currentDropdownMenu = this.nextElementSibling;
+                    if (window.innerWidth > 992) { 
+                        const isCurrentlyOpen = currentDropdownMenu && currentDropdownMenu.style.display === 'flex'; 
+                        // Close all *other* dropdowns of type 'mega-menu' or 'dropdown-menu'
+                        document.querySelectorAll('nav .dropdown-menu, nav .mega-menu').forEach(menu => {
+                            if (menu !== currentDropdownMenu) { // Don't close the one we might be trying to open
                                 menu.style.display = 'none';
-                            });
-                            if (!isCurrentlyOpen && currentDropdownMenu) {
-                                currentDropdownMenu.style.display = 'flex'; 
                             }
-                        } else { 
-                             if (currentDropdownMenu) {
-                                currentDropdownMenu.style.display = currentDropdownMenu.style.display === 'block' ? 'none' : 'block';
-                            }
+                        });
+                        if (currentDropdownMenu) { // Check if currentDropdownMenu exists
+                           currentDropdownMenu.style.display = isCurrentlyOpen ? 'none' : 'flex';
+                        }
+                    } else { 
+                         if (currentDropdownMenu) {
+                            currentDropdownMenu.style.display = currentDropdownMenu.style.display === 'block' ? 'none' : 'block';
                         }
                     }
                 });
@@ -332,28 +272,32 @@
                         }
                     });
                     let clickedInsideAMenu = false;
-                    document.querySelectorAll('nav .mega-menu').forEach(menu => { 
+                    // Check both types of dropdowns if they exist
+                    document.querySelectorAll('nav .dropdown-menu, nav .mega-menu').forEach(menu => { 
                         if (menu.contains(event.target)) {
                             clickedInsideAMenu = true;
                         }
                     });
                     if (!clickedInsideADropdownToggle && !clickedInsideAMenu) {
-                        document.querySelectorAll('nav .mega-menu').forEach(menu => {
+                        document.querySelectorAll('nav .dropdown-menu, nav .mega-menu').forEach(menu => {
                             menu.style.display = 'none';
                         });
                     }
                 } else { 
+                     // Close mobile menu if clicking outside header
                      if (navUl.classList.contains('active') && !event.target.closest('header')) {
                         navUl.classList.remove('active');
-                        const homeMegaMenu = document.querySelector('li.is-home-mega-menu .mega-menu');
-                        if(homeMegaMenu) homeMegaMenu.style.display = 'none';
+                        // If other mobile dropdowns exist and need closing, add logic here
+                        // e.g., document.querySelectorAll('nav ul .dropdown-menu').forEach(m => m.style.display = 'none');
                     }
                 }
             });
 
             allNavLinks.forEach(link => {
                 link.addEventListener('click', function(event) {
-                    if (!this.parentElement.classList.contains('is-home-mega-menu') && this.getAttribute('href').startsWith('#')) {
+                    // The check for 'is-home-mega-menu' is no longer needed here as Home is not a dropdown.
+                    // Prevent default for all hash links that are handled by category switching.
+                    if (this.getAttribute('href').startsWith('#')) {
                         event.preventDefault(); 
                     }
 
@@ -374,9 +318,8 @@
                     });
                     
                     if (category !== 'home' && document.getElementById(category)) {
-                        // Smooth scroll to section
                         const targetSection = document.getElementById(category);
-                        const headerOffset = document.querySelector('header').offsetHeight + 20; // 20px buffer
+                        const headerOffset = document.querySelector('header').offsetHeight + 20; 
                         const elementPosition = targetSection.getBoundingClientRect().top;
                         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -388,10 +331,10 @@
                         window.scrollTo({ top: 0, behavior: 'smooth' }); 
                     }
 
+                    // Close mobile nav if an item is clicked
                     if (window.innerWidth <= 992 && navUl.classList.contains('active')) {
                         navUl.classList.remove('active');
-                        const homeMegaMenu = document.querySelector('li.is-home-mega-menu .mega-menu');
-                        if(homeMegaMenu) homeMegaMenu.style.display = 'none';
+                        // No need to hide homeMegaMenu as it doesn't exist in the same way
                     }
                 });
             });
@@ -410,9 +353,11 @@
                         link.classList.add('active');
                     }
                 });
-                if (!document.querySelector('nav ul li a.nav-link.active') && homeMegaMenuLink) {
-                    homeMegaMenuLink.classList.add('active');
+                // Ensure home link is active if no other specific category is targeted by hash
+                if (!document.querySelector('nav ul li a.nav-link.active') && homeLink) {
+                    homeLink.classList.add('active');
                 }
+
 
                 toolCategorySections.forEach(section => {
                     if (activeCategory === 'home') {
@@ -425,9 +370,8 @@
                         }
                     }
                 });
-                 // Scroll to hash if present on load
                 if (hash && document.getElementById(hash)) {
-                    setTimeout(() => { // Timeout to ensure page layout is complete
+                    setTimeout(() => { 
                         const targetSection = document.getElementById(hash);
                         const headerOffset = document.querySelector('header').offsetHeight + 20;
                         const elementPosition = targetSection.getBoundingClientRect().top;
