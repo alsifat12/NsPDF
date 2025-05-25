@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en"> <!-- Changed lang to "en" as content is in English -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,12 +30,12 @@
         nav ul li a.nav-link.active { border-bottom-color: #007bff; padding-bottom: 8px; }
         .dropdown-arrow { font-size: 0.7em; margin-left: 5px; }
 
-        /* Standard Dropdown & Mega Menu Base (Kept for potential future use with other dropdowns, though Home no longer uses it) */
+        /* Standard Dropdown & Mega Menu Base (Kept for potential future use with other dropdowns) */
         .dropdown-menu { display: none; position: absolute; background-color: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); list-style: none; padding: 5px 0; margin: 0; min-width: 220px; z-index: 1001; left: 0; border-radius: 4px; border-top: 3px solid #007bff; }
         .dropdown-menu li a { padding: 10px 20px; white-space: nowrap; font-size: 0.9em; color: #495057; font-weight: 500; }
         .dropdown-menu li a:hover { background-color: #f0f8ff; color: #0056b3; }
 
-        /* Mega Menu General Structure (Kept for potential future use, though Home no longer uses it directly) */
+        /* Mega Menu General Structure (Kept for potential future use) */
         .mega-menu { display: flex; flex-wrap: wrap; justify-content: flex-start; padding: 20px 10px; }
         .mega-menu-column { padding: 0 10px; margin-bottom: 15px; }
         .mega-menu-column h4 { font-size: 0.95em; color: #007bff; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #e9ecef; font-weight: 600; }
@@ -58,9 +58,8 @@
         .mega-menu-column ul li a:hover { background-color: transparent; color: #0056b3; }
         .mega-menu-column ul li a:hover i { color: #0056b3; }
 
-
-        /* Specific styles for Home Mega Menu - These might become redundant or need adjustment if no other mega menus use these exact classes */
-        /* If Home was the *only* mega menu, these could be removed or generalized */
+        /* Specific styles for Home Mega Menu - REMOVED as Home is no longer a mega menu */
+        /* Original styles were:
         li.is-home-mega-menu .mega-menu { min-width: 950px; max-width: 95vw; left: 0; transform: translateX(0); }
         li.is-home-mega-menu .mega-menu-column { flex: 1 1 calc(20% - 20px); min-width: 180px; }
         li.is-home-mega-menu .mega-menu-column ul { display: flex; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
@@ -68,6 +67,7 @@
         li.is-home-mega-menu .mega-menu-column ul li:nth-child(2n) { margin-right: 0; }
         li.is-home-mega-menu .mega-menu-column.single-item-row ul li { width: calc(100% - 10px); margin-right: 0; }
         li.is-home-mega-menu .mega-menu-column ul li a { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; padding: 7px 5px; }
+        */
         
 
         /* Hero Section */
@@ -138,14 +138,14 @@
             nav ul li a.active, nav ul li a.nav-link.active { border-bottom: none; border-left: 3px solid #007bff; padding-left: 15px;}
             .menu-toggle { display: block; }
             nav { position: relative; }
-            /* Adjustments for dropdowns in responsive if any exist, Home mega-menu specific styles below might be less relevant */
-            .dropdown-menu, .mega-menu { /* This style might apply if other dropdowns exist and become static */
+            /* Adjustments for dropdowns/mega-menus in responsive if any exist */
+            .dropdown-menu, .mega-menu { 
                 position: static; box-shadow: none; border-top: 1px solid #e9ecef; 
                 width: 100% !important; min-width: 100%; transform: none !important; 
                 left: 0 !important; border-radius:0; border-left: 3px solid transparent; 
             }
             
-            /* These .mega-menu specific responsive styles might need review if other mega-menus exist or if Home was the only one*/
+            /* General mega-menu responsive styles (if other mega-menus exist or are planned) */
             .mega-menu-column ul { display: flex; flex-direction: column !important; padding: 0; }
             .mega-menu-column ul li { width: auto !important; margin-right: 0 !important; }
             .mega-menu-column ul li a { padding-left: 25px !important; white-space: normal; }
@@ -172,8 +172,6 @@
             .tools-grid { grid-template-columns: 1fr; } .logo { font-size: 1.7em; }
             .hero h1 { font-size: 1.8em; } .hero p { font-size: 0.95em; } .category-title { font-size: 1.5em; }
             nav ul li a {padding: 10px 15px;}
-            /* This specific rule for home mega menu list items might be obsolete now */
-            /* li.is-home-mega-menu .mega-menu-column ul li { width: 100% !important; } */
             .modal-upload-container .select-file-button { height: 50px; font-size: 0.95em;}
             .modal-upload-container .select-file-button .document-icon svg { width: 22px; height: 22px;}
             .modal-upload-container .upload-icon-container { width: 50px; }
@@ -224,8 +222,8 @@
             const menuToggle = document.querySelector('.menu-toggle');
             const navUl = document.querySelector('nav ul');
             const allNavLinks = document.querySelectorAll('nav ul li a.nav-link'); 
-            // const homeMegaMenuLink = document.querySelector('nav ul li.is-home-mega-menu > a.dropdown-toggle'); // This is no longer a dropdown
-            const homeLink = document.querySelector('nav ul li a.nav-link[data-category="home"]'); // Get the Home link directly
+            // const homeMegaMenuLink = document.querySelector('nav ul li.is-home-mega-menu > a.dropdown-toggle'); // REMOVED - This variable is no longer needed as Home is not a mega menu
+            const homeLink = document.querySelector('nav ul li a.nav-link[data-category="home"]'); 
             const toolCategorySections = document.querySelectorAll('.tool-category-section.category-content');
 
             if (menuToggle && navUl) {
@@ -234,25 +232,20 @@
                 });
             }
 
-            // Simplified dropdown logic if other dropdowns exist.
-            // If Home was the ONLY dropdown, this entire block could be removed.
-            // For now, assuming other '.dropdown-toggle' elements might exist.
+            // Simplified dropdown logic (kept for potential other dropdowns).
             const dropdownToggles = document.querySelectorAll('.dropdown-toggle'); 
             dropdownToggles.forEach(toggle => {
                 toggle.addEventListener('click', function(event) {
-                    // Removed the is-home-mega-menu check as Home is no longer a mega menu.
                     // This part now only applies to *other* potential dropdowns.
-                    // event.preventDefault(); // Only prevent default if it's a mega menu that shouldn't navigate
                     let currentDropdownMenu = this.nextElementSibling;
                     if (window.innerWidth > 992) { 
                         const isCurrentlyOpen = currentDropdownMenu && currentDropdownMenu.style.display === 'flex'; 
-                        // Close all *other* dropdowns of type 'mega-menu' or 'dropdown-menu'
                         document.querySelectorAll('nav .dropdown-menu, nav .mega-menu').forEach(menu => {
-                            if (menu !== currentDropdownMenu) { // Don't close the one we might be trying to open
+                            if (menu !== currentDropdownMenu) { 
                                 menu.style.display = 'none';
                             }
                         });
-                        if (currentDropdownMenu) { // Check if currentDropdownMenu exists
+                        if (currentDropdownMenu) { 
                            currentDropdownMenu.style.display = isCurrentlyOpen ? 'none' : 'flex';
                         }
                     } else { 
@@ -272,7 +265,6 @@
                         }
                     });
                     let clickedInsideAMenu = false;
-                    // Check both types of dropdowns if they exist
                     document.querySelectorAll('nav .dropdown-menu, nav .mega-menu').forEach(menu => { 
                         if (menu.contains(event.target)) {
                             clickedInsideAMenu = true;
@@ -284,19 +276,14 @@
                         });
                     }
                 } else { 
-                     // Close mobile menu if clicking outside header
                      if (navUl.classList.contains('active') && !event.target.closest('header')) {
                         navUl.classList.remove('active');
-                        // If other mobile dropdowns exist and need closing, add logic here
-                        // e.g., document.querySelectorAll('nav ul .dropdown-menu').forEach(m => m.style.display = 'none');
                     }
                 }
             });
 
             allNavLinks.forEach(link => {
                 link.addEventListener('click', function(event) {
-                    // The check for 'is-home-mega-menu' is no longer needed here as Home is not a dropdown.
-                    // Prevent default for all hash links that are handled by category switching.
                     if (this.getAttribute('href').startsWith('#')) {
                         event.preventDefault(); 
                     }
@@ -331,10 +318,8 @@
                         window.scrollTo({ top: 0, behavior: 'smooth' }); 
                     }
 
-                    // Close mobile nav if an item is clicked
                     if (window.innerWidth <= 992 && navUl.classList.contains('active')) {
                         navUl.classList.remove('active');
-                        // No need to hide homeMegaMenu as it doesn't exist in the same way
                     }
                 });
             });
@@ -353,11 +338,9 @@
                         link.classList.add('active');
                     }
                 });
-                // Ensure home link is active if no other specific category is targeted by hash
                 if (!document.querySelector('nav ul li a.nav-link.active') && homeLink) {
                     homeLink.classList.add('active');
                 }
-
 
                 toolCategorySections.forEach(section => {
                     if (activeCategory === 'home') {
